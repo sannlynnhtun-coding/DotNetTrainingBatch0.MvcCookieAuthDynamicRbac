@@ -1,0 +1,47 @@
+@model DotNetTrainingBatch0.MvcCookieAuthDynamicRbac.Features.Product.ProductListResponse
+
+@{
+    ViewData["Title"] = "Products (Dynamic RBAC)";
+}
+
+<h1>Products (Dynamic RBAC)</h1>
+
+<p>
+    @if (User.HasClaim("permission", "Product.Create"))
+    {
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    }
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Description</td>
+                <td>
+                    @if (User.HasClaim("permission", "Product.Update"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    }
+                    @if (User.HasClaim("permission", "Product.Delete"))
+                    {
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

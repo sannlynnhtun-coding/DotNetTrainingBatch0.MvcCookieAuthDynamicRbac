@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DotNetTrainingBatch0.Database/DotNetTrainingBatch0.Database.csproj" />
+  <Project Path="DotNetTrainingBatch0.MvcCookieAuthDynamicRbac/DotNetTrainingBatch0.MvcCookieAuthDynamicRbac.csproj" />
+</Solution>
